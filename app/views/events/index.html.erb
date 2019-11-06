@@ -1,2 +1,12 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<h2 class = "text-center">La liste des événements crées</h1>
+<% @events.each_with_index do |event,index| %>
+  <div class="card">
+    <div class="card-body">	
+      <p class="card-text"><%= "Title : " + event.title %></p>
+      <p class="card-text"><%= "Description : " + event.description%></p>
+       <%= link_to "Voir détails", event_path(event[:id]), class: "card-link btn btn-primary" %>
+    </div>
+  </div>
+  <br>
+<% end %>
+
