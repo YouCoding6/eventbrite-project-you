@@ -1,9 +1,9 @@
 require 'faker'
 
 
-nb_user = 20  
-nb_events = 10
-nb_guests = 20
+nb_user = 15 
+nb_events = 8
+nb_guests = 30
 
 
 nb_user.times do |x|
@@ -31,5 +31,12 @@ nb_events.times do |x|
     title: Faker::Book.title,
     admin_id: User.all.sample.id)
   puts "Seeding of Event nb #{x}"
+end
+
+nb_guests.times do |x|
+  Attendance.create(
+    participant_id: User.all.sample.id,
+    event_id: Event.all.sample.id)
+  puts "Seeding of Attendance nb #{x}"
 end
 

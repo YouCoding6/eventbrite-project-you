@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
 
 	has_many :events, foreign_key: 'admin_id', class_name: "Event"
-	has_many :attendences, foreign_key: 'participant_id', class_name: "Attendences"
-  has_many :events, through: :attendences
+	has_many :attendances, foreign_key: 'participant_id', class_name: "Attendance"
+  has_many :events, through: :attendances
 
 end

@@ -1,10 +1,57 @@
-<div class="card" style="width: 25rem;">
-  <ul class="card-body" class= "list-group list-group-flush">
-    <li class="card-title" class="list-group-item" class="font-weight-bold"><%="Title : " + @event.title%></li>
-    <li class="card-text" class="list-group-item" class ="text-justify"><%= "Description : " + @event.description %></li>
-    <li class="card-title" class="list-group-item"> <%= "Start date : " %></li>
-    <li class="card-title" class="list-group-item"> <%= "Duration : " %></li>
-    <li class="card-title" class="list-group-item"> <%= "Location : " %></li>
-    <li class="card-title" class="list-group-item"> <%= "Price : " %></li>
-  </ul>
-</div>
+<!-- MESSAGE SI CONNEXION RÉUSSIE -->
+<% if flash[:success] %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <h2>Ton event à bien été enregistré ! </h2>
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+<% end %>
+
+<% if flash[:success2] %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+   <h2>Ton event à bien été enregistré ! </h2>
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+<% end %>
+
+<div class='container mt-4'>
+  <br>
+  <h1><%= @event.title %></h1>
+  <!-- INFORMATION SUR L'UTILISATEUR -->
+  <br>
+  <div class= 'border border-white mt-4 pt-4 pl-2' style="max-width: 50rem; font-size: 18px;">
+    <p>
+      <u>Date de début</u>: <%= @event.start_date.strftime('%d of %B, %Y - %HH%M') %><br>
+      <u>Date de fin</u>: <%= @end_date %><br>
+      <u>Créateur de l'Event</u>: <%= User.find(@event.admin_id).email %><br>
+      <u>Lieu de l'Event</u>: <%= @event.location %><br>
+      <u>Description</u>: <%= @event.description %><br>
+      <u>Prix</u>: <%= @event.price%> €<br>
+    </p>
+  </div>
+  
+  <div>
+    <br>
+    <% if current_user  %>
+        <% if current_user != @event.admin && attending_event?.include?(current_user.id) == false %>
+         <p  style="color: white; font-size: 1em; border-radius: 20px;" class="btn btn-warning" >  <%= link_to "Participer à cet évenement",new_event_attendance_path(@event.id)%>  </p>
+        <% end %>
+
+     <% else %>
+      <p  style="color: white; font-size: 1em; border-radius: 20px;" class="btn btn-warning" >  <%= link_to "Connectez vous pour participer à cet évenement", new_user_session_path%>  </p>
+     <% end %>
+
+
+     <% if current_user && is_event_admin?(@event.admin) %>
+    
+      <p  style="color: white; font-size: 1em; border-radius: 20px;" class="btn btn-danger" >  <%= link_to "Supprimer", event_path(@event.id),method: :delete %>  </p>
+
+      <p  style="color: white; font-size: 1em; border-radius: 20px;" class="btn btn-outline-primary"></button>  <%= link_to "Editer", edit_event_path(:id => @event.id)%></p>
+
+       <p  style="color: white; font-size: 1em; border-radius: 20px;" class="btn btn-light" >  <%= link_to "Liste des inscrits", event_attendances_path(@event.id)%></p>
+     <%end%>   
+      
+  </div>

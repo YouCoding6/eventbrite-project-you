@@ -5,7 +5,7 @@ class Attendance < ApplicationRecord
 	
 
   	def welcome_send
-    	AttendanceMailer.welcome_email(self).deliver_now
+    	UserMailer.attend_welcome_email(self).deliver_now
   	end
 
 end

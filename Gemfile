@@ -67,6 +67,8 @@ gem 'dotenv-rails'
 
 gem 'devise'
 
+gem 'stripe'
+
 gem 'letter_opener', :group => :development
 
 gem "faker", "~> 2.7"
