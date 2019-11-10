@@ -1,16 +1,17 @@
 class Event < ApplicationRecord
 	belongs_to :admin, class_name: "User"
 	has_many :attendances
-    has_many :participants, through: :attendances
+  has_many :participants, through: :attendances
+  has_one_attached :event_picture
 
-    validates :start_date, presence: true
-    validate :start_date_cannot_be_in_the_past
-    validates :duration,
-    presence: true,
-    :numericality => {:greater_than => 0}
-    validate :duration_must_be_a_multiple_of_five
-    validates :title,
-    presence: true,
+  validates :start_date, presence: true
+  validate :start_date_cannot_be_in_the_past
+  validates :duration,
+  presence: true,
+  :numericality => {:greater_than => 0}
+  validate :duration_must_be_a_multiple_of_five
+  validates :title,
+  presence: true,
 	length: { minimum: 5, maximum:140 }
 	validates :description,
 	presence: true,
