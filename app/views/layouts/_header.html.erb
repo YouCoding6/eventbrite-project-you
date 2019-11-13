@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Header</title>
+    
+   
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Eventbrite</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="/"> Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="events/new">Créer un événement</a>
+          </li>
+        </ul>
+        <% if !(user_signed_in?) %>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Connexion/Inscription</button>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%=link_to "S'inscrire" ,new_user_registration_path,class:"dropdown-item"%>
+                  <%=link_to "Se connecter",new_user_session_path , class:"dropdown-item" %>
+              </div>
+          </div>
+        </div>
+        <%else%>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Mon Profil</button>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%=link_to "Mon Profil",user_path(current_user),class:"dropdown-item"%>
+                  <%=link_to "Se déconnecter",destroy_user_session_path,method: :delete ,class:"dropdown-item"%>
+              </div>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </nav>
+
+
+    
+  </body>
+</html>
+
+

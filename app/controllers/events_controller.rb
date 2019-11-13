@@ -19,8 +19,10 @@ class EventsController < ApplicationController
 		@event = Event.new(event_params)
         @event.admin_id = current_user.id
 		if @event.save
+      flash[:success] = "Event was successfully created."
 			redirect_to event_path(@event.id)
 		else
+      flash.now[:error] = @event.errors.full_messages.to_sentence
 			render new_event_path
 		end
 	end	

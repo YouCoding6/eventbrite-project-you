@@ -12,5 +12,10 @@ Rails.application.routes.draw do
     resources :pictures, only: [:create]
   	resources :charges
     resources :attendances
+  end
+  namespace :admin do
+    root to: 'base#index'
+    resources :users, except: [:show]
+    resources :events
   end  
 end

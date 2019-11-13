@@ -1,5 +1,9 @@
 require 'faker'
 
+User.destroy_all
+Event.destroy_all
+Attendance.destroy_all
+
 
 nb_user = 15 
 nb_events = 8
@@ -13,7 +17,8 @@ nb_user.times do |x|
       first_name:  fname,
       password: 'azerty',
       last_name: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph_by_chars(number: 200, supplemental: false))
+      description: Faker::Lorem.paragraph_by_chars(number: 200, supplemental: false),
+      is_admin: false)
   puts "Seeding of User nb #{x}"
 end
 

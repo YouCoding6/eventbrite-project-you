@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <% if flash[:notice] %>
+    <div class="alert alert-dismissible alert-success">
+       <div class="notice"><strong><%= flash[:notice] %></strong></div>
+       <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  <% end %>
+  <h2>Liste des utilisateurs</h2>   
+      <% @users.each do |user|%>
+      <ul>
+        <li>First name :<%= user.first_name%></li>
+        <li>Last name :<%= user.last_name%></li>
+        <li>Email :<%= user.email%></li>
+        <li>Created at :<%= user.created_at%></li>
+        <%= link_to "Editer", edit_admin_user_path(:id => user.id)%>
+        <br> 
+        <%= link_to "Supprimer", user_path(user.id),data: { confirm: 'Supprimer cet utilisateur ?' }, method: :delete %>
+      </ul>  
+      <% end%>
+
+  <h2>Liste des événements</h2>    
+      <% @events.each do |event|%>
+      <ul>
+        <li>Title :<%= event.title%></li>
+        <li>Organised by :<%= event.admin.first_name%> <%= event.admin.last_name%></li>
+        <li>Location :<%= event.location%></li>
+        <li>Price :<%= event.price%></li>
+        <li>Start date :<%= event.start_date%></li>
+        <%= link_to "Editer", edit_admin_event_path(:id => event.id)%> 
+        <br>
+        <%= link_to "Supprimer", event_path(event.id),data: { confirm: 'Supprimer cet événement ?' }, method: :delete %>
+      </ul>
+      <%end%> 
+</body>
+</html>
+
+
+   
+ 
+
+
+
+
+   
+
+    
